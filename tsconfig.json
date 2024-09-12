@@ -1,15 +1,28 @@
 {
-    "include": [
-        "./src/**/*"
-    ],
-    "compilerOptions": {
-        "strict": true,
-        "esModuleInterop": true,
-        "lib": [
-            "dom",
-            "es2019"
-        ],
-        "jsx": "react-jsx",
-        "plugins": [{ "name": "typescript-plugin-css-modules" }]
-    }
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "target": "es2022",
+    "module": "node16",
+    "lib": ["ES2022", "DOM"],
+    "moduleResolution": "NodeNext",
+    "rootDir": ".",
+    "outDir": "build",
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "sourceMap": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "pretty": true,
+    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+  },
+  "include": ["src/**/*"]
 }

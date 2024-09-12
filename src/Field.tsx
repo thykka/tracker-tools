@@ -1,5 +1,5 @@
-import { FieldsDefinition } from "./field-utils";
-import styles from "./Field.module.scss";
+import { FieldsDefinition } from './field-utils.js';
+import styles from './Field.module.scss';
 
 type Props<T extends FieldsDefinition> = {
   id: string;
@@ -11,10 +11,10 @@ type Props<T extends FieldsDefinition> = {
   readOnly?: boolean;
   min?: number;
   max?: number;
-  onChange?: <K extends keyof T>(id: K, value: T[K]["initialValue"]) => void;
+  onChange?: <K extends keyof T>(id: K, value: T[K]['initialValue']) => void;
   formatter?: <K extends keyof T>(
-    value: T[K]["initialValue"]
-  ) => T[K]["initialValue"];
+    value: T[K]['initialValue']
+  ) => T[K]['initialValue'];
 };
 
 export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
@@ -27,7 +27,7 @@ export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
     largeStep = step * 10,
     min = 0,
     max = 100,
-    formatter,
+    formatter
   } = props;
   const isInput = !props.readOnly;
   const format = formatter ?? ((v) => v);

@@ -1,9 +1,9 @@
-import { Field } from "./Field";
-import { FieldGroup } from "./FieldGroup";
-import { Frame } from "./Frame";
-import { useFieldsState } from "./field-utils";
-import { fieldDefinitions, sections } from "./Fields";
-import "./App.scss";
+import { Field } from './Field.jsx';
+import { FieldGroup } from './FieldGroup.jsx';
+import { Frame } from './Frame.jsx';
+import { useFieldsState } from './field-utils.js';
+import { fieldDefinitions, sections } from './Fields.js';
+import './App.scss';
 
 export default function App() {
   const { fields, updateField } = useFieldsState(fieldDefinitions);
@@ -14,7 +14,7 @@ export default function App() {
       Object.entries(fieldDefinitions).filter(
         ([id, def]) => def.section === sectionIndex
       )
-    ),
+    )
   }));
 
   return (
@@ -27,6 +27,7 @@ export default function App() {
               return (
                 <Field
                   id={id}
+                  key={id}
                   label={field.label}
                   value={fields[id]}
                   min={field.min}

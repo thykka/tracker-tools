@@ -1,4 +1,11 @@
 .container {
   display: flex;
   flex-flow: row wrap;
+  margin: 0 auto;
+  max-width: 80em;
+
+  h1 {
+    width: 100%;
+    text-align: right;
+  }
 }
