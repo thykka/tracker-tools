@@ -78,14 +78,6 @@ export const fieldDefinitions: FieldsDefinition = {
       parseInt(fields.patternSize, 10),
     formatter: Formatters.decimal
   },
-  secondsPerBeat: {
-    section: 1,
-    initialValue: 0,
-    units: `${Units.seconds}/${Units.beat}`,
-    readOnly: true,
-    update: (_, fields) => 60 / parseFloat(fields.projectTempo),
-    formatter: Formatters.decimal
-  },
   secondsPerBar: {
     section: 1,
     initialValue: 0,
@@ -94,6 +86,14 @@ export const fieldDefinitions: FieldsDefinition = {
     update: (_, fields) =>
       (60 / parseFloat(fields.projectTempo)) *
       parseInt(fields.timeSignature, 10),
+    formatter: Formatters.decimal
+  },
+  secondsPerBeat: {
+    section: 1,
+    initialValue: 0,
+    units: `${Units.seconds}/${Units.beat}`,
+    readOnly: true,
+    update: (_, fields) => 60 / parseFloat(fields.projectTempo),
     formatter: Formatters.decimal
   },
   secondsPerStep: {

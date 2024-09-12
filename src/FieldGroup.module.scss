@@ -3,18 +3,20 @@
   border-top: 1px dotted;
   display: flex;
   flex-flow: column nowrap;
-  flex: 100%;
+  flex: 1 0 calc(100% - 1rem);
   gap: 0.25rem;
   padding: 1rem 0;
-  margin: 0 0.5rem 0.5rem;
+  margin: 0 0.125rem 0.25rem;
   max-width: 100%;
 
-  @media (min-width: 540px) {
+  @media (min-width: 481px) {
     flex: 1 0;
   }
 }
 
 .label {
-  font-size: 0.75rem;
+  font-size: 1rem;
   text-transform: uppercase;
+  text-align: left;
+  margin-left: 0;
 }

@@ -3,13 +3,14 @@
   flex: 1 0 auto;
   flex-flow: row nowrap;
   overflow: hidden;
+  align-items: stretch;
 }
 
 .label,
 .value,
 .units,
 .button {
-  padding: 0.5rem;
+  padding: 0.5rem 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -17,27 +18,33 @@
 
 .label,
 .units {
+  font-size: 0.75rem;
   flex: 0 1 6rem;
   text-transform: uppercase;
 }
 
 .label {
-  flex-shrink: 0;
   text-align: right;
 
   &:empty {
-    flex: 0 0 0;
+    flex: 0 1 0px;
+  }
+
+  &:not(:empty) {
+    padding-right: 1rem;
   }
 }
 
 .units {
   text-align: left;
+  padding-left: 1rem;
 }
 
 .value {
   flex: 1 1 5rem;
   min-width: 5rem;
   text-align: right;
+  padding: 0.5rem 1rem;
 
   &:is(input) {
     border: 0;
