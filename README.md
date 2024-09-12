@@ -14,7 +14,7 @@ It's a calculator for working with samples and music, built as a companion app f
 
 ## Usage
 
-Currently there's no public online build. In the meanwhile you can build the project by yourself:
+Currently there's no public online build. In the meanwhile you can try using [the CSB-version](https://codesandbox.io/p/github/thykka/tracker-tools/main?workspaceId=568207be-e96b-47be-b457-76fc7fa24a7e) or build the project by yourself:
 
 1. Use Node.js v20.11 (recommend using [nvm](https://github.com/nvm-sh/nvm))
 
