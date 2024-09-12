@@ -1,0 +1,34 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+:root {
+  --color-app-bg: #222;
+  --color-app-fg: #fec;
+  --color-field-bg: #333;
+  --color-field-fg: #ea4;
+  --color-interactive-bg: #111;
+  --color-interactive-fg: #fb2;
+  background-color: var(--color-app-bg, black);
+  color: var(--color-app-fg, #fec);
+  font-family: monospace;
+  text-align: center;
+}
+
+input,
+button {
+  color: currentColor;
+  font: inherit;
+}
+
+h1 {
+  font-weight: normal;
+  padding: 0 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+:focus {
+  outline: 1px solid var(--color-interactive-fg);
+}

@@ -1,0 +1,20 @@
+.container {
+  border: none;
+  border-top: 1px dotted;
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 100%;
+  gap: 1rem;
+  padding: 1rem 0;
+  margin: 0 0.5rem 0.5rem;
+  max-width: 100%;
+
+  @media (min-width: 540px) {
+    flex: 1 0;
+  }
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}

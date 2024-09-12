@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+}
+
+.label,
+.value,
+.units,
+.button {
+  padding: 0.5rem;
+}
+
+.label {
+  flex: 0 0 auto;
+  width: 6rem;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.value {
+  flex: 1 1;
+  width: 5rem;
+  text-align: right;
+
+  &:is(input) {
+    border: 0;
+    margin: 0 1px;
+    background: var(--color-field-bg, black);
+    color: var(--color-field-fg, white);
+    // hide arrows, because we're making our own
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+  &:is(output) {
+    background: var(--color-field-bg, #444);
+    color: currentColor;
+    cursor: not-allowed;
+  }
+}
+
+.button {
+  flex-shrink: 0;
+  border: 0;
+  background: var(--color-interactive-bg, black);
+  color: var(--color-interactive-fg, white);
+  cursor: pointer;
+  white-space: nowrap;
+  width: 2.125rem;
+
+  + .button {
+    margin-left: 1px;
+  }
+}
+
+.units {
+  flex: 0 0 6rem;
+  text-align: left;
+  text-transform: uppercase;
+  width: 5rem;
+}
