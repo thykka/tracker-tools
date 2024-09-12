@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback } from 'react';
 
 export type FieldDefinition<T> = {
   initialValue: T;
@@ -19,19 +19,19 @@ export type FieldsDefinition = Record<string, FieldDefinition<any>>;
 export const useFieldsState = <T extends FieldsDefinition>(
   fieldDefinitions: T
 ) => {
-  type FieldValues = { [K in keyof T]: T[K]["initialValue"] };
+  type FieldValues = { [K in keyof T]: T[K]['initialValue'] };
 
   const initialState = Object.fromEntries(
     Object.entries(fieldDefinitions).map(([key, definition]) => [
       key,
-      definition.initialValue,
+      definition.initialValue
     ])
   ) as FieldValues;
 
   const [fields, setFields] = useState<FieldValues>(initialState);
 
   const updateField = useCallback(
-    <K extends keyof T>(id: K, newValue: T[K]["initialValue"]) => {
+    <K extends keyof T>(id: K, newValue: T[K]['initialValue']) => {
       setFields((prevFields) => {
         const newFields = { ...prevFields, [id]: newValue };
         (

@@ -12,7 +12,7 @@ export default function App() {
     label: section,
     fields: Object.fromEntries(
       Object.entries(fieldDefinitions).filter(
-        ([id, def]) => def.section === sectionIndex
+        ([_, def]) => def.section === sectionIndex
       )
     )
   }));

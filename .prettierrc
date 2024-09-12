@@ -3,7 +3,7 @@
   "trailingComma": "none",
   "overrides": [
     {
-      "files": ["*.ts", "*.mts"],
+      "files": ["*.ts", "*.mts", "*.tsx"],
       "options": {
         "parser": "typescript"
       }

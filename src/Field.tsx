@@ -47,13 +47,13 @@ export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
         <>
           <button
             className={styles.button}
-            onClick={(event) => props.onChange?.(id, Number(value) - largeStep)}
+            onClick={() => props.onChange?.(id, Number(value) - largeStep)}
           >
             &minus;&minus;
           </button>
           <button
             className={styles.button}
-            onClick={(event) => props.onChange?.(id, Number(value) - step)}
+            onClick={() => props.onChange?.(id, Number(value) - step)}
           >
             &minus;
           </button>
@@ -78,13 +78,13 @@ export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
         <>
           <button
             className={styles.button}
-            onClick={(event) => props.onChange?.(id, Number(value) + step)}
+            onClick={() => props.onChange?.(id, Number(value) + step)}
           >
             +
           </button>
           <button
             className={styles.button}
-            onClick={(event) => props.onChange?.(id, Number(value) + largeStep)}
+            onClick={() => props.onChange?.(id, Number(value) + largeStep)}
           >
             ++
           </button>

@@ -21,7 +21,7 @@ export default [
     'prettier'
   ),
   {
-    ignores: ['dist/*', 'build/*', 'coverage/*', '**/.*']
+    ignores: ['dist/*', '**/.*']
   },
   {
     rules: {

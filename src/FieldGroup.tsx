@@ -1,4 +1,4 @@
-import styles from "./FieldGroup.module.scss";
+import styles from './FieldGroup.module.scss';
 
 type Props = {
   label: string;

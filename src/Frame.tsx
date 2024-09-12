@@ -1,4 +1,4 @@
-import styles from "./Frame.module.scss";
+import styles from './Frame.module.scss';
 
 type Props = {
   children?: React.ReactNode;
