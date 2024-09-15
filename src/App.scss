@@ -16,13 +16,24 @@
   font-family: monospace;
   font-size: 112.5%;
   font-weight: 100;
-  text-align: center;
+}
+
+a {
+  color: var(--color-interactive-fg);
+
+  &:visited:not(:hover) {
+    color: var(--color-app-fg);
+  }
 }
 
 input,
 button {
   color: currentColor;
   font: inherit;
+
+  &:hover {
+    box-shadow: inset 0 0 0 1px var(--color-interactive-fg);
+  }
 }
 
 h1 {
@@ -32,5 +43,6 @@ h1 {
 }
 
 :focus {
-  outline: 1px solid var(--color-interactive-fg);
+  outline: none;
+  box-shadow: inset 0 0 0 1px var(--color-interactive-fg);
 }

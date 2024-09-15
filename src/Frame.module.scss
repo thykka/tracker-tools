@@ -5,8 +5,12 @@
   width: 100em;
   max-width: 100%;
 
-  h1 {
+  h1,
+  footer {
     width: 100%;
+  }
+
+  h1 {
     text-align: right;
   }
 }

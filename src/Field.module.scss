@@ -21,10 +21,12 @@
   font-size: 0.75rem;
   flex: 0 1 6rem;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .label {
   text-align: right;
+  cursor: pointer;
 
   &:empty {
     flex: 0 1 0px;
@@ -62,7 +64,6 @@
   &:is(output) {
     background: var(--color-field-bg, #444);
     color: currentColor;
-    cursor: not-allowed;
   }
 }
 
