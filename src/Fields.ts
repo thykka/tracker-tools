@@ -23,7 +23,9 @@ const Formatters: Formatter<typeof fieldDefinitions> = {
       0
     ),
   decimal: (value: number | string): string =>
-    (typeof value === 'string' ? parseFloat(value) : value).toFixed(3),
+    (typeof value === 'string' ? parseFloat(value) : value).toFixed(
+      4 - (value !== 0 ? Math.log10(Number(value) + 1) : 0)
+    ),
   oneDecimal: (value: number | string): string =>
     (typeof value === 'string' ? parseFloat(value) : value).toFixed(1)
 } as const;
@@ -54,6 +56,7 @@ export const fieldDefinitions: FieldsDefinition = {
     units: Units.steps,
     min: 1,
     max: 128,
+    largeStep: 8,
     update: (value) => value,
     formatter: Formatters.integer
   },
@@ -109,9 +112,9 @@ export const fieldDefinitions: FieldsDefinition = {
     label: 'Length',
     initialValue: 0.5,
     units: Units.seconds,
-    min: 0,
+    min: 0.05,
     max: 60,
-    step: 0.01,
+    step: 0.05,
     largeStep: 1,
     update: (value) => value,
     formatter: Formatters.decimal
@@ -123,8 +126,8 @@ export const fieldDefinitions: FieldsDefinition = {
     units: Units.beats,
     min: 0,
     max: 128,
-    step: 0.125,
-    largeStep: 1,
+    step: 1,
+    largeStep: 4,
     update: (value) => value,
     formatter: Formatters.decimal
   },

@@ -17,6 +17,9 @@ type Props<T extends FieldsDefinition> = {
   ) => T[K]['initialValue'];
 };
 
+const clamp = (min: number, max: number, value: number): number =>
+  Math.max(min, Math.min(max, value));
+
 export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
   const {
     id,
@@ -25,19 +28,23 @@ export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
     units,
     step = 1,
     largeStep = step * 10,
-    min = 0,
-    max = 100,
-    formatter
+    min,
+    max,
+    formatter,
+    onChange
   } = props;
   const isInput = !props.readOnly;
-  const format = formatter ?? ((v) => v);
-  let formattedValue = value;
-  try {
-    formattedValue = formatter?.(value) ?? value;
-  } catch (e) {
-    console.log(`Formatting error`, { id, value });
-    throw e;
-  }
+
+  const onChangeHandler = (id: keyof T, newValue: number): void => {
+    if (typeof onChange !== 'function') return;
+    let resultValue = newValue;
+    if (typeof min === 'number' && typeof max === 'number' && min !== max)
+      resultValue = clamp(min, max, resultValue);
+    onChange(id, resultValue);
+  };
+
+  const formattedValue =
+    typeof formatter === 'function' ? formatter(value) : value;
   return (
     <div className={styles.container}>
       <label htmlFor={id} className={styles.label}>
@@ -47,13 +54,13 @@ export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
         <>
           <button
             className={styles.button}
-            onClick={() => props.onChange?.(id, Number(value) - largeStep)}
+            onClick={() => onChangeHandler(id, Number(value) - largeStep)}
           >
             &minus;&minus;
           </button>
           <button
             className={styles.button}
-            onClick={() => props.onChange?.(id, Number(value) - step)}
+            onClick={() => onChangeHandler(id, Number(value) - step)}
           >
             &minus;
           </button>
@@ -64,27 +71,32 @@ export const Field = <T extends FieldsDefinition>(props: Props<T>) => {
             step={step}
             min={min}
             max={max}
-            value={format(value)}
+            value={formattedValue}
+            onFocus={(event) => event.target.select()}
             onChange={(event) =>
-              props.onChange?.(id, event.currentTarget.value)
+              onChangeHandler(id, Number(event.currentTarget.value))
             }
-            onInput={(event) => props.onChange?.(id, event.currentTarget.value)}
+            onInput={(event) =>
+              onChangeHandler(id, Number(event.currentTarget.value))
+            }
           />
         </>
       ) : (
-        <output className={styles.value}>{format(value)}</output>
+        <output id={id} className={styles.value}>
+          {formattedValue}
+        </output>
       )}
       {isInput && (
         <>
           <button
             className={styles.button}
-            onClick={() => props.onChange?.(id, Number(value) + step)}
+            onClick={() => onChangeHandler(id, Number(value) + step)}
           >
             +
           </button>
           <button
             className={styles.button}
-            onClick={() => props.onChange?.(id, Number(value) + largeStep)}
+            onClick={() => onChangeHandler(id, Number(value) + largeStep)}
           >
             ++
           </button>
