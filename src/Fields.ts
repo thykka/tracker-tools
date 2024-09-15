@@ -38,10 +38,25 @@ export const sections = [
   'Pitch → tempo'
 ] as const;
 
+const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+const formatInterval = (intervalHalftones: number): string => {
+  const intervalRounded = Math.floor(intervalHalftones);
+  let noteIndex = (intervalRounded + notes.length) % notes.length;
+  while (noteIndex < 0) {
+    noteIndex += 12;
+  }
+  const note = notes[noteIndex] ?? '-';
+  if (note === '-') console.log({ intervalRounded, noteIndex });
+  const microTune = intervalHalftones - intervalRounded;
+  const octave = 5 + Math.floor(intervalRounded / 12);
+  return `${note}${octave} / ${microTune == 0 ? '--' : `M ${Math.round(microTune * 100)}`}`;
+};
+
 export const fieldDefinitions: FieldsDefinition = {
   projectTempo: {
     section: 0,
-    initialValue: 120,
+    initialValue: 130,
     label: 'Tempo',
     units: Units.bpm,
     min: 1,
@@ -154,7 +169,7 @@ export const fieldDefinitions: FieldsDefinition = {
   sampleTempo: {
     section: 3,
     label: 'Sample',
-    initialValue: 180,
+    initialValue: 120,
     units: Units.bpm,
     min: 1,
     max: 999,
@@ -177,9 +192,15 @@ export const fieldDefinitions: FieldsDefinition = {
   changedNote: {
     section: 3,
     label: 'Note',
-    initialValue: 'G5 / M -2',
+    initialValue: formatInterval(0),
     readOnly: true,
-    update: (value) => String(value)
+    update: (_, fields) =>
+      formatInterval(
+        bpmChangeAsSemitones(
+          parseFloat(fields.sampleTempo),
+          parseFloat(fields.projectTempo)
+        )
+      )
   },
   targetSemitones: {
     section: 4,
