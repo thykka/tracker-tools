@@ -22,7 +22,7 @@ export default function App() {
       <h1>Tracker+ Tools</h1>
       {groupedFields.map((section) => {
         return (
-          <FieldGroup label={section.label}>
+          <FieldGroup key={section.label} label={section.label}>
             {Object.entries(section.fields).map(([id, field]) => {
               return (
                 <Field
