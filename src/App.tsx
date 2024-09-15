@@ -4,9 +4,15 @@ import { Frame } from './Frame.jsx';
 import { useFieldsState } from './field-utils.js';
 import { fieldDefinitions, sections } from './Fields.js';
 import './App.scss';
+import { useEffect } from 'react';
 
 export default function App() {
   const { fields, updateField } = useFieldsState(fieldDefinitions);
+
+  useEffect(() => {
+    // Calculate initial values once
+    updateField('projectTempo', fields.projectTempo);
+  }, []);
 
   const groupedFields = sections.map((section, sectionIndex) => ({
     label: section,
@@ -19,7 +25,7 @@ export default function App() {
 
   return (
     <Frame>
-      <h1>Tracker+ Tools</h1>
+      <h1>Tracker Tools</h1>
       {groupedFields.map((section) => {
         return (
           <FieldGroup key={section.label} label={section.label}>
@@ -44,6 +50,13 @@ export default function App() {
           </FieldGroup>
         );
       })}
+      <footer>
+        <ul>
+          <li>
+            <a href="https://github.com/thykka/tracker-tools/">GitHub</a>
+          </li>
+        </ul>
+      </footer>
     </Frame>
   );
 }

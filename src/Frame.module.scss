@@ -2,11 +2,16 @@
   display: flex;
   flex-flow: row wrap;
   margin: 0 auto;
+  gap: var(--global-gap, 1rem);
   width: 100em;
   max-width: 100%;
 
-  h1 {
+  h1,
+  footer {
     width: 100%;
+  }
+
+  h1 {
     text-align: right;
   }
 }
