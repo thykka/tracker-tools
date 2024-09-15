@@ -50,6 +50,13 @@ export default function App() {
           </FieldGroup>
         );
       })}
+      <footer>
+        <ul>
+          <li>
+            <a href="https://github.com/thykka/tracker-tools/">GitHub</a>
+          </li>
+        </ul>
+      </footer>
     </Frame>
   );
 }
