@@ -25,7 +25,7 @@ export default function App() {
 
   return (
     <Frame>
-      <h1>Tracker+ Tools</h1>
+      <h1>Tracker Tools</h1>
       {groupedFields.map((section) => {
         return (
           <FieldGroup key={section.label} label={section.label}>

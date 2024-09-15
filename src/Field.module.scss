@@ -1,16 +1,19 @@
 .container {
   display: flex;
-  flex: 1 0 auto;
   flex-flow: row nowrap;
   overflow: hidden;
-  align-items: stretch;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1px;
+
+  --gap: var(--global-gap, 1rem);
 }
 
 .label,
 .value,
 .units,
 .button {
-  padding: 0.5rem 0;
+  padding: var(--gap) 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -19,7 +22,7 @@
 .label,
 .units {
   font-size: 0.75rem;
-  flex: 0 1 6rem;
+  flex: 0 0 5rem;
   text-transform: uppercase;
   user-select: none;
 }
@@ -28,25 +31,21 @@
   text-align: right;
   cursor: pointer;
 
-  &:empty {
-    flex: 0 1 0px;
-  }
-
   &:not(:empty) {
-    padding-right: 1rem;
+    padding-right: var(--gap);
   }
 }
 
 .units {
   text-align: left;
-  padding-left: 1rem;
+  padding-left: var(--gap);
 }
 
 .value {
   flex: 1 1 5rem;
   min-width: 6rem;
   text-align: right;
-  padding: 0.5rem 1rem;
+  padding: var(--gap) var(--gap);
 
   &:is(input) {
     border: 0;
@@ -62,7 +61,7 @@
     }
   }
   &:is(output) {
-    background: var(--color-field-bg, #444);
+    box-shadow: inset 0 0 0 1px var(--color-field-bg, #444);
     color: currentColor;
   }
 }
@@ -74,7 +73,7 @@
   color: var(--color-interactive-fg, white);
   cursor: pointer;
   white-space: nowrap;
-  width: 3rem;
+  width: calc(2 * var(--gap) + 2rem);
 
   + .button {
     margin-left: 1px;

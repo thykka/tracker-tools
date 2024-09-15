@@ -11,11 +11,28 @@
   --color-field-fg: #ea4;
   --color-interactive-bg: #111;
   --color-interactive-fg: #fb2;
+  --global-gap: 0.25rem;
   background-color: var(--color-app-bg, black);
   color: var(--color-app-fg, #fec);
   font-family: monospace;
   font-size: 112.5%;
   font-weight: 100;
+
+  @media (max-width: 480px) {
+    font-size: 100%;
+  }
+
+  @media (min-width: 600px) {
+    --global-gap: 0.5rem;
+  }
+
+  @media (min-width: 1400px) {
+    font-size: 125%;
+  }
+}
+
+body {
+  margin: 0;
 }
 
 a {
@@ -39,7 +56,7 @@ button {
 h1 {
   font-weight: normal;
   padding: 0 0.5rem;
-  margin: 0.25rem 0 0.5rem;
+  margin: 0;
 }
 
 :focus {
