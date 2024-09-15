@@ -151,9 +151,9 @@ export const fieldDefinitions: FieldsDefinition = {
       (parseFloat(fields.beats) * 60) / parseFloat(fields.seconds),
     formatter: Formatters.oneDecimal
   },
-  targetTempo: {
+  sampleTempo: {
     section: 3,
-    label: 'Target',
+    label: 'Sample',
     initialValue: 180,
     units: Units.bpm,
     min: 1,
@@ -168,9 +168,9 @@ export const fieldDefinitions: FieldsDefinition = {
     units: Units.semitones,
     readOnly: true,
     update: (_, fields) =>
-      12 *
-      Math.log2(
-        parseInt(fields.targetTempo, 10) / parseFloat(fields.projectTempo)
+      bpmChangeAsSemitones(
+        parseFloat(fields.sampleTempo),
+        parseFloat(fields.projectTempo)
       ),
     formatter: Formatters.decimal
   },
@@ -203,3 +203,6 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.oneDecimal
   }
 } as const;
+
+const bpmChangeAsSemitones = (sourceTempo: number, sampleTempo: number) =>
+  12 * Math.log2(sampleTempo / sourceTempo);
