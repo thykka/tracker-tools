@@ -4,9 +4,15 @@ import { Frame } from './Frame.jsx';
 import { useFieldsState } from './field-utils.js';
 import { fieldDefinitions, sections } from './Fields.js';
 import './App.scss';
+import { useEffect } from 'react';
 
 export default function App() {
   const { fields, updateField } = useFieldsState(fieldDefinitions);
+
+  useEffect(() => {
+    // Calculate initial values once
+    updateField('projectTempo', fields.projectTempo);
+  }, []);
 
   const groupedFields = sections.map((section, sectionIndex) => ({
     label: section,
