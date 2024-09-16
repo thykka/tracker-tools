@@ -14,7 +14,8 @@ const Units = {
   step: 'step',
   steps: 'steps',
   pattern: 'patt.',
-  semitones: 'semis'
+  semitones: 'semis',
+  hertz: 'Hz'
 } as const;
 
 const Formatters: Formatter<typeof fieldDefinitions> = {
@@ -32,6 +33,7 @@ const Formatters: Formatter<typeof fieldDefinitions> = {
 
 export const sections = [
   'Project settings',
+  'BPM → Frequency',
   'BPM → duration',
   'Duration → BPM',
   'Tempo → pitch',
@@ -47,7 +49,6 @@ const formatInterval = (intervalHalftones: number): string => {
     noteIndex += 12;
   }
   const note = notes[noteIndex] ?? '-';
-  if (note === '-') console.log({ intervalRounded, noteIndex });
   const microTune = intervalHalftones - intervalRounded;
   const octave = 5 + Math.floor(intervalRounded / 12);
   return `${note}${octave} / ${microTune == 0 ? '--' : `M ${Math.round(microTune * 100)}`}`;
@@ -86,8 +87,27 @@ export const fieldDefinitions: FieldsDefinition = {
     update: (value) => value,
     formatter: Formatters.integer
   },
-  secondsPerPattern: {
+  lfoBeats: {
     section: 1,
+    label: 'Length',
+    initialValue: 4,
+    largeStep: 8,
+    units: Units.beats,
+    min: 1,
+    max: 256,
+    update: (value) => value,
+    formatter: Formatters.integer
+  },
+  lfoFrequency: {
+    section: 1,
+    initialValue: 120,
+    units: Units.hertz,
+    readOnly: true,
+    update: (_, fields) => 1 / ((fields.lfoBeats * 60) / fields.projectTempo),
+    formatter: Formatters.decimal
+  },
+  secondsPerPattern: {
+    section: 2,
     initialValue: 0,
     units: `${Units.seconds}/${Units.pattern}`,
     readOnly: true,
@@ -97,7 +117,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   secondsPerBar: {
-    section: 1,
+    section: 2,
     initialValue: 0,
     units: `${Units.seconds}/${Units.bar}`,
     readOnly: true,
@@ -107,7 +127,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   secondsPerBeat: {
-    section: 1,
+    section: 2,
     initialValue: 0,
     units: `${Units.seconds}/${Units.beat}`,
     readOnly: true,
@@ -115,7 +135,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   secondsPerStep: {
-    section: 1,
+    section: 2,
     initialValue: 0,
     units: `${Units.seconds}/${Units.step}`,
     readOnly: true,
@@ -123,7 +143,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   seconds: {
-    section: 2,
+    section: 3,
     label: 'Length',
     initialValue: 0.5,
     units: Units.seconds,
@@ -135,7 +155,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   beats: {
-    section: 2,
+    section: 3,
     label: 'Length',
     initialValue: 1.0,
     units: Units.beats,
@@ -147,7 +167,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   bars: {
-    section: 2,
+    section: 3,
     label: 'Length',
     initialValue: 0,
     units: Units.bars,
@@ -157,7 +177,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   newBpm: {
-    section: 2,
+    section: 3,
     label: 'Result',
     initialValue: 0,
     units: Units.bpm,
@@ -167,7 +187,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.oneDecimal
   },
   sampleTempo: {
-    section: 3,
+    section: 4,
     label: 'Sample',
     initialValue: 120,
     units: Units.bpm,
@@ -177,7 +197,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.integer
   },
   changedSemitones: {
-    section: 3,
+    section: 4,
     label: 'Change',
     initialValue: 0,
     units: Units.semitones,
@@ -190,7 +210,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.decimal
   },
   changedNote: {
-    section: 3,
+    section: 4,
     label: 'Note',
     initialValue: formatInterval(0),
     readOnly: true,
@@ -203,7 +223,7 @@ export const fieldDefinitions: FieldsDefinition = {
       )
   },
   targetSemitones: {
-    section: 4,
+    section: 5,
     label: 'Change',
     initialValue: -1,
     units: Units.semitones,
@@ -213,7 +233,7 @@ export const fieldDefinitions: FieldsDefinition = {
     formatter: Formatters.integer
   },
   changedBpm: {
-    section: 4,
+    section: 5,
     label: 'Result',
     initialValue: 0,
     units: Units.bpm,
